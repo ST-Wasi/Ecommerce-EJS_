@@ -1,0 +1,57 @@
+<%-include('./partials/header')%>
+<%-include('./partials/navbar')%>
+
+<h1>Edit Product</h1>
+<div class="container">
+  
+    <form class="needs-validation mx-auto" action="/product/<%=product._id%>?_method=PATCH" method="post" novalidate>
+        <div class="mb-3">
+          <label for="validationForName" class="form-label">Name</label>
+          <input type="text" name="name" class="form-control" id="validationForName" value="<%=product.name%>" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please choose A Good Name.
+          </div>
+        </div>
+    
+        <div class="mb-3">
+          <label for="validationForPrice" class="form-label">Image</label>
+          <input type="text" class="form-control" id="validationForPrice" value="<%=product.image%>" name="image" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please choose Image.
+          </div>
+        </div>
+    
+        <div class="mb-3">
+          <label for="validationForPrice" class="form-label">Price</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend">₹</span>
+            <input type="text" class="form-control" name="price" id="validationForPrice" value="<%=product.price%>" aria-describedby="inputGroupPrepend" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please choose A Good Price.
+            </div>
+          </div>
+        </div>
+    
+        <div class="mb-3">
+          <label for="validationCustom03" class="form-label">Description</label>
+          <textarea class="form-control" name="description" cols="30" rows="10" id="validationCustom03" required><%=product.description%></textarea>
+          <div class="invalid-feedback">
+            Please provide Description.
+          </div>
+        </div>
+    
+        <div class="mb-3">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </form>
+    </div>
+<%-include('./partials/footerbar')%>

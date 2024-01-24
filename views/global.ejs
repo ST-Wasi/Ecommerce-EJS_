@@ -1,0 +1,43 @@
+<%-include('partials/header')%>
+<%-include('partials/navbar')%>
+    <header id = "header" class = "vh-100 carousel slide" data-bs-ride = "carousel" style = "padding-top: 104px;">
+        <div class = "container h-100 d-flex align-items-center carousel-inner">
+            <div class = "text-center carousel-item active">
+                <h2 class = "text-capitalize text-white">Best collection</h2>
+                <h1 class = "text-uppercase py-2 fw-bold text-white">New Year Arrivals</h1>
+                <a href = "/home" class = "btn mt-3 text-uppercase">shop now</a>
+            </div>
+            <div class = "text-center carousel-item">
+                <h2 class = "text-capitalize text-white">best price & offer</h2>
+                <h1 class = "text-uppercase py-2 fw-bold text-white">Winter Sale</h1>
+                <a href = "/home" class = "btn mt-3 text-uppercase">View Offers</a>
+            </div>
+        </div>
+
+        <button class = "carousel-control-prev" type = "button" data-bs-target="#header" data-bs-slide = "prev">
+            <span class = "carousel-control-prev-icon"></span>
+        </button>
+        <button class = "carousel-control-next" type = "button" data-bs-target="#header" data-bs-slide = "next">
+            <span class = "carousel-control-next-icon"></span>
+        </button>
+    </header>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div class = "title text-center py-5">
+  <h2 class = "position-relative d-inline-block">Sale</h2>
+</div>
+    <section id = "offers" class = "py-5">
+        <div class = "container">
+            <div class = "row d-flex align-items-center justify-content-center text-center justify-content-lg-start text-lg-start">
+                <div class = "offers-content">
+                    <span class = "text-white">Discount Up To 40%</span>
+                    <h2 class = "mt-2 mb-4 text-white">Grand Sale Offer!</h2>
+                    <a href = "/home" class = "btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src = "bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src = "js/script.js"></script>
+<%-include('./partials/footer')%>

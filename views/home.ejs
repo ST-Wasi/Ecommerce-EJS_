@@ -1,0 +1,32 @@
+<%-include('./partials/header')%>
+<%-include('./partials/navbar')%>
+<%-include('./partials/flash')%>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4 h1s">All Products</h1>
+  <div class="d-flex flex-wrap justify-content-center">
+    <% for(let item of data){ %>
+      <div class="card m-2 wasistyle" style="width: 18rem;">
+        <img src="/images/<%=item.image%>" class="card-img-top semi-circle" alt="<%=item.name%>">
+        <div class="card-body">
+          <h5 class="card-title"><%=item.name%></h5>
+          <h5 class="card-title">₹<%=item.price%></h5>
+          <span class="btn like-btn" productId="<%=item._id%>">
+            <% if(currentUser && currentUser.wishlist.includes(item._id)){ %>
+              <i class="fa-solid fa-heart"></i>
+           <% } else{ %>
+              <i class="fa-regular fa-heart"></i>
+           <% } %>
+          </span>
+          <p class="card-text"><%=item.description%></p>
+          <a href="/product/<%=item._id%>" class="btn btn-primary">View Details</a>
+          <%if(currentUser && currentUser.role === 'seller'){%>
+            <a href="/product/<%=item._id%>/edit" class="btn btn-primary">Edit Product</a>
+          <%}%>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+<script src="js/common.js"></script>
+<%-include('./partials/footer')%>

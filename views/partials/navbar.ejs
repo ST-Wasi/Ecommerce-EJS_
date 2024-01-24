@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
+  <div class="container">
+    <a
+      class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
+      href="/"
+    >
+    <svg fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 483.1 483.1" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M434.55,418.7l-27.8-313.3c-0.5-6.2-5.7-10.9-12-10.9h-58.6c-0.1-52.1-42.5-94.5-94.6-94.5s-94.5,42.4-94.6,94.5h-58.6 c-6.2,0-11.4,4.7-12,10.9l-27.8,313.3c0,0.4,0,0.7,0,1.1c0,34.9,32.1,63.3,71.5,63.3h243c39.4,0,71.5-28.4,71.5-63.3 C434.55,419.4,434.55,419.1,434.55,418.7z M241.55,24c38.9,0,70.5,31.6,70.6,70.5h-141.2C171.05,55.6,202.65,24,241.55,24z M363.05,459h-243c-26,0-47.2-17.3-47.5-38.8l26.8-301.7h47.6v42.1c0,6.6,5.4,12,12,12s12-5.4,12-12v-42.1h141.2v42.1 c0,6.6,5.4,12,12,12s12-5.4,12-12v-42.1h47.6l26.8,301.8C410.25,441.7,389.05,459,363.05,459z"></path> </g> </g></svg>
+      <span class="text-uppercase fw-lighter ms-2">Wasi</span>
+    </a>
+
+    
+    <div class="order-lg-2 nav-btns">
+      <% if(currentUser){ %>
+        <button type="button" class="btn position-relative">
+          <a style="color: black;" href="/cart"><i class="fa fa-shopping-cart"></i></a>
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge bg-primary"
+            ><%=currentUser.cart.length%></span
+          >
+        </button>
+     <% } %>
+    </div>
+    <div class="order-lg-2 nav-btns">
+        <ul class="navbar-nav mx-auto">
+          <% if(currentUser){ %>
+            <li class="nav-item px-2 py-2">
+              <a class="nav-link text-uppercase text-dark" href="/logout">Logout</a>
+            </li>
+         <% } else{ %>
+            <li class="nav-item px-2 py-2">
+              <a class="nav-link text-uppercase text-dark" href="/login">Login</a>
+            </li>
+        <%  } %>
+          
+        </ul>
+    </div>
+
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navMenu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+      <ul class="navbar-nav mx-auto text-center">
+        <li class="nav-item px-2 py-2">
+          <a class="nav-link text-uppercase text-dark" href="/">home</a>
+        </li>
+        <%if(currentUser && currentUser.role === 'seller' && currentUser.isVeryfiedSeller){ %>
+        <li class="nav-item px-2 py-2">
+          <a class="nav-link text-uppercase text-dark" href="/product/new"
+            >New</a
+          >
+        </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</nav>

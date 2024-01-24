@@ -1,0 +1,39 @@
+<%-include('../partials/header')%>
+
+
+<div class="row" style="margin-top: 80px;">
+    <div class="col-6 mx-auto">
+        <h1 class="display-6">Sign-up Form</h1>
+        <form action="/signup" method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username: </label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required>
+            </div>
+            <div class="mb-3">
+                <label for="mail" class="form-label">Email: </label>
+                <input type="email" class="form-control" name="email" id="mail" placeholder="email of the user" required>
+            </div>
+
+            <div class="btn-group">
+                Want To Register As ? : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" class="btn-check" name="options" id="buyer" value="buyer" autocomplete="off" />
+                <label class="btn btn-secondary" for="buyer" data-mdb-ripple-init>Buyer</label>
+              
+                <input type="radio" class="btn-check" name="options" id="seller" value="seller" autocomplete="off" checked/>
+                <label class="btn btn-secondary" for="seller" data-mdb-ripple-init>Seller</label>
+
+              </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password: </label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="password of the user" required>
+            </div>
+            <button type="submit" class="btn btn-sm btn-success">Signup</button>
+            <p class="mt-2">already have an account? <a href="/login">Login now</a></p>
+        </form>
+    </div>
+</div>
+
+
+<script src="/js/script.js"></script>
+<%-include('../partials/footerbar')%>

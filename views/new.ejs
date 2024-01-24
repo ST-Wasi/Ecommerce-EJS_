@@ -1,0 +1,218 @@
+<%-include('./partials/header')%> <%-include('./partials/navbar')%>
+<h1>Add New Product</h1>
+<div class="container mt-5">
+  <form
+    class="needs-validation mx-auto"
+    action="/products"
+    method="post"
+    enctype="multipart/form-data"
+    novalidate
+  >
+    <div class="mb-3">
+      <label for="validationForName" class="form-label">Name</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        id="validationForName"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please choose A Good Name.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="validationForImage" class="form-label">Image</label>
+      <input
+        type="file"
+        class="form-control"
+        id="validationForImage"
+        name="image"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please choose Image.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="validationForPrice" class="form-label">Price</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text" id="inputGroupPrepend">₹</span>
+        <input
+          type="text"
+          class="form-control"
+          name="price"
+          id="validationForPrice"
+          aria-describedby="inputGroupPrepend"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please choose A Good Price.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="validationForQuantity" class="form-label">Quantity(In Stock)</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text" id="inputGroupPrepend">Qty</span>
+        <input
+          type="number"
+          class="form-control"
+          name="quantity"
+          id="validationForQuantity"
+          aria-describedby="inputGroupPrepend"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please choose Product Quantity.</div>
+      </div>
+    </div>
+    <input type="hidden" id="selectedCategory" name="category" value="" />
+
+    <div class="mb-3">
+      <label for="validationForCategory" class="form-label">Category</label>
+      <select class="form-select" name="category" id="validationForCategory" required>
+        <option value="" disabled selected>Select a category</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+        <option value="toys">Toys</option>
+        <option value="babyclothes">Baby Clothes</option>
+        <option value="books">Books</option>
+        <option value="stationary">Stationary</option>
+        <option value="officeitems">Office Items</option>
+        <option value="others">Others</option>
+      </select>
+      <div class="invalid-feedback">Please select a category.</div>
+    </div>
+
+    <div class="btn-group">
+      Is It Popular ? : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input
+        type="radio"
+        class="btn-check"
+        name="isPopularItem"
+        id="isPopularItemTrue"
+        value="true"
+        autocomplete="off"
+      />
+      <label class="btn btn-secondary" for="isPopularItemTrue" data-mdb-ripple-init
+        >True</label
+      >
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="isPopularItem"
+        id="isPopularItemFalse"
+        value="false"
+        autocomplete="off"
+        checked
+      />
+      <label class="btn btn-secondary" for="isPopularItemFalse" data-mdb-ripple-init
+        >False</label
+      >
+    </div>
+    <br />
+    <div class="btn-group">
+      Is This Item is In sale ?: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input
+        type="radio"
+        class="btn-check"
+        name="isInSaleItem"
+        id="isInSaleItemTrue"
+        value="true"
+        autocomplete="off"
+      />
+      <label class="btn btn-secondary" for="isInSaleItemTrue" data-mdb-ripple-init
+        >True</label
+      >
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="isInSaleItem"
+        id="isInSaleItemFalse"
+        value="false"
+        autocomplete="off"
+      />
+      <label class="btn btn-secondary" for="isInSaleItemFalse" data-mdb-ripple-init
+        >False</label
+      >
+    </div>
+    <br />
+    <div class="btn-group">
+      Is This Is In Stock ? : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input
+        type="radio"
+        class="btn-check"
+        name="isInStock"
+        id="isInStockTrue"
+        value="true"
+        autocomplete="off"
+      />
+      <label class="btn btn-secondary" for="isInStockTrue" data-mdb-ripple-init
+        >True</label
+      >
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="isInStock"
+        id="isInStockFalse"
+        value="false"
+        autocomplete="off"
+        checked
+      />
+      <label class="btn btn-secondary" for="isInStockFalse" data-mdb-ripple-init
+        >False</label
+      >
+    </div>
+    <br>
+    <div class="btn-group">
+      Is This New ? : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input
+        type="radio"
+        class="btn-check"
+        name="isNewItem"
+        id="isNewItemTrue"
+        value="true"
+        autocomplete="off"
+      />
+      <label class="btn btn-secondary" for="isNewItemTrue" data-mdb-ripple-init
+        >True</label
+      >
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="isNewItem"
+        id="isNewItemFalse"
+        value="false"
+        autocomplete="off"
+        checked
+      />
+      <label class="btn btn-secondary" for="isNewItemFalse" data-mdb-ripple-init
+        >False</label
+      >
+    </div>
+    <br />
+    <div class="mb-3">
+      <label for="validationCustom03" class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        name="description"
+        cols="30"
+        rows="10"
+        id="validationCustom03"
+        required
+      ></textarea>
+      <div class="invalid-feedback">Please provide Description.</div>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Submit form</button>
+    </div>
+  </form>
+</div>
+<script src="/js/script.js"></script>
+<%-include('./partials/footerbar')%>

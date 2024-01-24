@@ -1,0 +1,25 @@
+<%-include('../partials/header')%>
+<%-include('../partials/flash')%>
+
+
+<div class="row" style="margin-top: 80px;">
+    <div class="col-6 mx-auto">
+        <form action="/admin/dashboard/user/login" method="POST">
+            <h1 class="display-6">Admin Login</h1>
+             <div class="mb-3">
+                <label for="username" class="form-label">Username: </label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter User Name" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password: </label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="password of the user" required>
+            </div>
+            <button type="submit" class="btn btn-sm btn-success">login</button>
+            <p class="mt-2">Wanna Create New Admin? <a href="/admin/dashboard/create/user">Go</a></p>
+        </form>
+    </div>
+</div>
+
+
+<script src="/js/script.js"></script>
+<%-include('../partials/footerbar')%>
