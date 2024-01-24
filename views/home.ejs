@@ -20,7 +20,7 @@
           </span>
           <p class="card-text"><%=item.description%></p>
           <a href="/product/<%=item._id%>" class="btn btn-primary">View Details</a>
-          <%if(currentUser && currentUser.role === 'seller'){%>
+          <%if(currentUser && currentUser.role === 'seller' && item.author.equals(currentUser._id)){%>
             <a href="/product/<%=item._id%>/edit" class="btn btn-primary">Edit Product</a>
           <%}%>
         </div>
