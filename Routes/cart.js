@@ -3,7 +3,7 @@ const Product = require("../models/Product");
 const { isLoggedIn } = require("../middlewares/middleware");
 const User = require("../models/User");
 const router = express.Router();
-const stripe = require('stripe')('sk_test_51OaYE8SDey9MYA4smLWNGVqs1NIhoDOZk0MvW52f2pdcCIrnN0nEvp6y6TVy81WcF540cO6IgpFE8A4m0lClxtYn00WNR0lx6N')
+const stripe = require('stripe')(process.env.STRIPE_SECRET)
 
 router.post("/product/:id/cart", isLoggedIn, async (req, res) => {
   try {
