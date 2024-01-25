@@ -94,10 +94,12 @@ router.post('/forgot-password',async (req,res)=>{
                 from: process.env.EMAIL,
                 to: user.email,
                 subject: 'Password Reset',
-                text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-                'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-                'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+                html: `
+                <p style="font-family: Arial, sans-serif; color: #333;">You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
+                <p style="font-family: Arial, sans-serif; color: #333;">Please click on the following link, or paste this into your browser to complete the process:</p>
+                <p style="font-family: Arial, sans-serif; color: #007BFF;"><a href="http://${req.headers.host}/reset/${token}" style="color: #007BFF; text-decoration: none;">Reset Password</a></p>
+                <p style="font-family: Arial, sans-serif; color: #333;">If you did not request this, please ignore this email and your password will remain unchanged.</p>
+            `,
             };
 
             transporter.sendMail(mailOptions, (error,info)=>{
