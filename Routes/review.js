@@ -18,7 +18,7 @@ router.post("/review/:id/new",isLoggedIn,validateReview, async (req, res) => {
     req.flash('success','Review added sucesfully')
     res.redirect(`/product/${id}`)
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 });
 

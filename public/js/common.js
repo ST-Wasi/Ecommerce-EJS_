@@ -16,7 +16,6 @@ async function increaseQty(productId,plusButton){
     } catch (error) {
         if(error.response.status === 401){
             window.location.replace('/login');
-            console.log(error.message , 'error hai ye window vaali line ka')
         }
     }
 }
@@ -45,7 +44,6 @@ async function likeButton(productId,btn){
     } catch(e){
         if(e.response.status === 401){
             window.location.replace('/login');
-            console.log(e.message , 'error hai ye window vaali line ka')
         }
     }
    
@@ -59,7 +57,6 @@ for(let btn of allTheLikeButtons){
 }
 
 plusButton.addEventListener('click',()=>{
-    console.log('plus buttonclicked')
     const productId = plusButton.getAttribute('productId')
     increaseQty(productId,plusButton)
 })

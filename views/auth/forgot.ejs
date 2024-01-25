@@ -1,0 +1,19 @@
+<%-include('../partials/header')%>
+<%-include('../partials/flash')%>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="text-center">Give Your Registered Email To Reset Your Password</h2>
+            <form method="post" action="/forgot-password">
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Reset Password</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%-include('../partials/footerbar')%>
