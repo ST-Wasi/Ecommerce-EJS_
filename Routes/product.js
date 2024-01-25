@@ -160,9 +160,8 @@ router.delete(
         await Review.findByIdAndDelete(item._id);
       }
       await Product.findByIdAndDelete(id);
-      const user = req.user;
-      await User.findByIdAndUpdate(user._id, { $pull: { cart: {product: id} } });
-      await User.findByIdAndUpdate(user._id, { $pull: { wishlist: id } });
+      await User.updateMany({}, { $pull: { cart: { product: id } } });
+      await User.updateMany({}, { $pull: { wishlist: id } });
       res.redirect("/home");
     } catch (error) {
       req.flash("error", "Internal Server Error", error);

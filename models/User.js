@@ -35,7 +35,9 @@ const userSchema = new mongoose.Schema({
     wishlist: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product"
-    }]
+    }],
+    resetPasswordToken: String,
+    resetPasswordExpires: String
 });
 
 userSchema.plugin(passportLocalMongoose);

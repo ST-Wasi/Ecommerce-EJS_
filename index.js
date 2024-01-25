@@ -19,7 +19,7 @@ const LocalStrategy = require('passport-local')
 const User = require("./models/User");
 
 const uri = process.env.ATLAS_URL
-// db connect
+
 mongoose
   .connect(uri)
   .then(() => {
@@ -33,7 +33,6 @@ mongoose
     console.log(`Error connecting the database: ${err}`);
   });
 
-// session configuration for middleware
 let configSession = {
   secret: 'keyboard cat',
   resave: false,
@@ -45,11 +44,11 @@ let configSession = {
   }
 };
 
-// view engine
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-//middleware
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
