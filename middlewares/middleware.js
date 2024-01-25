@@ -20,18 +20,23 @@ const verifyToken = async (req, res, next) => {
 };
 
 const validateProduct = (req, res, next) => {
-  const { name, price, image, description } = req.body;
-  const { error } = productSchema.validate({ name, price, image, description });
+  try {
+    const { name, price, image, description, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category } = req.body;
 
-  if (error) {
-    const msg = error.details.map((item) => item.message).join(',');
-    req.flash('error', msg);
-    return res.render('error', { err: msg });
+    const { error } = productSchema.validate({ name, price, image, description, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category });
+
+    if (error) {
+      const msg = error.details.map((item) => item.message).join(',');
+      req.flash('error', msg);
+      return res.render('error', { err: msg });
+    }
+    next();
+  } catch (err) {
+    console.error('Error in validateProduct middleware:', err);
+    req.flash('error', 'An unexpected error occurred while validating the product.');
+    return res.render('error', { err: 'An unexpected error occurred while validating the product.' });
   }
-
-  next();
 };
-
 const validateReview = (req, res, next) => {
   const { rating, comment } = req.body;
   const { error } = reviewSchema.validate({ rating, comment });

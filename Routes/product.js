@@ -109,30 +109,41 @@ router.patch(
 
 router.post(
   "/products",
-    upload.single('image'),
+  upload.single('image'),
   isLoggedIn,
   isSeller,
   isVeryfiedSeller,
   validateProduct,
   async (req, res) => {
-
     try {
-      const { name, price, description, quantity,isInStock,isInSaleItem,isPopularItem,isNewItem,category } = req.body;
-      await Product.create({
-        name,
-        image: req.file.filename,
-        price,
-        quantity,
-        description,
-        isInStock,
-        isInSaleItem,
-        isPopularItem,
-        isNewItem,
-        category: category[1],
-        author: req.user._id,
-      });
-      req.flash("success", "Product Created Successfully");
-      res.redirect("/home");
+      const { name, price, description, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category } = req.body;
+
+      const requiredFields = { name, price, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category };
+      const missingFields = Object.keys(requiredFields).filter(field => !requiredFields[field]);
+
+      if (missingFields.length > 0) {
+        const errorMsg = `Missing required fields: ${missingFields.join(', ')}`;
+        req.flash("error", errorMsg);
+        return res.render('error', { err: errorMsg });
+      }
+
+
+        await Product.create({
+          name,
+          image: req.file.filename,
+          price,
+          quantity,
+          description,
+          isInStock,
+          isInSaleItem,
+          isPopularItem,
+          isNewItem,
+          category: category[1],
+          author: req.user._id,
+        });
+  
+        req.flash("success", "Product Created Successfully");
+        return res.redirect("/home");
     } catch (error) {
       console.error("Error creating product:", error);
       req.flash("error", "Internal Server Error");
@@ -140,6 +151,7 @@ router.post(
     }
   }
 );
+
 
 router.delete(
   "/product/:id/delete",
