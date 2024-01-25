@@ -21,8 +21,13 @@ const verifyToken = async (req, res, next) => {
 
 const validateProduct = (req, res, next) => {
   try {
-    const { name, price, image, description, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category } = req.body;
-
+    const { name, price, description, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category } = req.body;
+    let image;
+    if(req.file){
+      image = req.file.filename;
+    } else{
+      image = '';
+    }
     const { error } = productSchema.validate({ name, price, image, description, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category });
 
     if (error) {

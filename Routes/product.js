@@ -117,8 +117,10 @@ router.post(
   async (req, res) => {
     try {
       const { name, price, description, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category } = req.body;
-
-      const requiredFields = { name, price, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category };
+      console.log(name)
+      console.log(req.file)
+      const img = req.file.filename;
+      const requiredFields = { name, price, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category,img };
       const missingFields = Object.keys(requiredFields).filter(field => !requiredFields[field]);
 
       if (missingFields.length > 0) {
@@ -127,10 +129,10 @@ router.post(
         return res.render('error', { err: errorMsg });
       }
 
-
+      if(!req.file){}
         await Product.create({
           name,
-          image: req.file.filename,
+          image: img,
           price,
           quantity,
           description,
