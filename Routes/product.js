@@ -163,6 +163,7 @@ router.delete(
       await User.updateMany({}, { $pull: { cart: { product: id } } });
       await User.updateMany({}, { $pull: { wishlist: id } });
       res.redirect("/home");
+      
     } catch (error) {
       req.flash("error", "Internal Server Error", error);
       res.redirect("/home");
