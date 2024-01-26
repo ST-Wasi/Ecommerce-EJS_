@@ -31,6 +31,11 @@
               <a class="nav-link text-uppercase text-dark" href="/login">Login</a>
             </li>
         <%  } %>
+       <% if(currentUser && currentUser.isAdmin){ %>
+          <li class="nav-item px-2 py-2">
+            <a class="nav-link text-uppercase text-dark" href="/admin/dashboard">Admin</a>
+          </li>
+        <% } %>
           
         </ul>
     </div>
