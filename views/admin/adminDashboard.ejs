@@ -1,3 +1,48 @@
 <%-include('../partials/header')%>
-<h1>Hello Admin</h1>
+<%-include('../partials/flash')%>
+
+<h1 class="text-center">Hello Admin</h1>
+<div class="table-responsive">
+    
+        <table class="table table-bordered">
+              
+          <tr>
+            <th>S.No</th>
+            <th>username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Verify</th>
+            <th>Delete</th>
+          </tr>
+          <%for(let item of users){%> 
+          <tr>
+            <td><%=item._id%></td>
+            <td><%=item.username%></td>
+            <td><%=item.email%></td>
+            <td><%=item.role%></td>
+            <td>
+                <% if(item.role == 'seller'){%>
+                   <% if(item.isVeryfiedSeller){ %>
+                    <form action="/admin/<%=item._id%>/seller/verify" method="post">
+                        <button type="submit" class="btn btn-danger">Un-Verify</button>
+                    </form>
+                        <% }else{ %>
+                            <form action="/admin/<%=item._id%>/seller/verify" method="post">
+                                <button type="submit" class="btn btn-success">Verify</button>
+                            </form>
+                        <% } %>
+                <%}%>
+            </td>
+            <td>
+                <% if(!item.isAdmin){ %>
+                <form action="/admin/<%=item._id%>/delete?_method=delete" method="post">                
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <%}%>
+            </td>
+          </tr>
+          <%}%>
+        </table>
+  </div>
+
 <%-include('../partials/footerbar')%>
