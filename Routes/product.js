@@ -109,30 +109,24 @@ router.patch(
 
 router.post(
   "/products",
-  upload.single('image'),
   isLoggedIn,
   isSeller,
   isVeryfiedSeller,
   validateProduct,
   async (req, res) => {
     try {
-      const { name, price, description, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category } = req.body;
-      console.log(name)
-      console.log(req.file)
-      const img = req.file.filename;
-      const requiredFields = { name, price, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category,img };
+      const { name, price,image, description, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category } = req.body;
+      const requiredFields = { name, price, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category,image };
       const missingFields = Object.keys(requiredFields).filter(field => !requiredFields[field]);
 
-      if (missingFields.length > 0) {
-        const errorMsg = `Missing required fields: ${missingFields.join(', ')}`;
-        req.flash("error", errorMsg);
-        return res.render('error', { err: errorMsg });
-      }
-
-      if(!req.file){}
+      // if (missingFields.length > 0) {
+      //   const errorMsg = `Missing required fields: ${missingFields.join(', ')}`;
+      //   req.flash("error", errorMsg);
+      //   return res.render('error', { err: errorMsg });
+      // }
         await Product.create({
           name,
-          image: img,
+          image,
           price,
           quantity,
           description,
