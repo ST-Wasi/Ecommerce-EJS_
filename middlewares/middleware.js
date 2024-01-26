@@ -104,11 +104,17 @@ const isVeryfiedSeller = async (req,res,next)=>{
 }
 
 const isAdmin = async(req,res,next)=>{
-  if(!req.user.isAdmin){
-    req.flash('You are not authorized to acces this page');
-    return res.redirect('/home');
+  try{
+    if(!req.user.isAdmin){
+      req.flash('success','You Are Not Authorized To Access This Page');
+      return res.redirect('/home');
+    }
+    next();
   }
-  next();
+  catch(err){
+    req.flash('error','Internal Server Error');
+    console.error(err);
+  }
 }
 
 module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn,isSeller,isProductAuther,isVeryfiedSeller,isAdmin};
