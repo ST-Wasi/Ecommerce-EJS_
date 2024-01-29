@@ -44,4 +44,20 @@ router.delete('/admin/:id/delete',isLoggedIn,isBlocked,isAdmin, async(req,res)=>
   }
 });
 
+router.post('/admin/:id/block',isLoggedIn,isBlocked,isAdmin, async(req,res)=>{
+  try {
+    const {id} = req.params;
+    const user = await User.findById(id);
+    user.isBlocked = !user.isBlocked;
+    await user.save();
+    req.flash('success','User Updated Sucesfully');
+    return res.redirect('/admin/dashboard')
+  } catch (error) {
+    console.log(error)
+    req.flash('error','Error Faces While Updating User Please Contact IT team')
+    return res.redirect('/admin/dashboard')
+  }
+  
+});
+
 module.exports = router;

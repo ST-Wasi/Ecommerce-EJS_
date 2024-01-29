@@ -34,6 +34,7 @@ async function likeButton(productId,btn){
                 'X-Requested-With': 'XMLHttpRequest'
             }
            })
+           console.log('response from common js file ', response)
            if(btn.children[0].classList.contains('fa-regular')){
             btn.children[0].classList.remove('fa-regular')
             btn.children[0].classList.add('fa-solid')

@@ -3,7 +3,7 @@ const router = express.Router();
 const {isLoggedIn,isBlocked,} = require('../../middlewares/middleware');
 const User = require("../../models/User");
 
-router.post('/product/:id/like',isLoggedIn,isBlocked, async (req,res)=>{
+router.post('/product/:id/like',isBlocked,isLoggedIn, async (req,res)=>{
     const {id} = req.params;
     const user = req.user;
     const isLiked = user.wishlist.includes(id);
