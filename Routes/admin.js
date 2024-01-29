@@ -3,16 +3,17 @@ const router = express.Router();
 const {
     isAdmin,
     isLoggedIn,
+    isBlocked,
   } = require("../middlewares/middleware");
 const User = require('../models/User');
 const Product = require('../models/Product');
 
-router.get('/admin/dashboard',isLoggedIn,isAdmin,async (req,res)=>{
+router.get('/admin/dashboard',isLoggedIn,isBlocked,isAdmin,async (req,res)=>{
   const users = await User.find({});
     res.render('admin/adminDashboard',{users})
 })
 
-router.post('/admin/:id/seller/verify',isLoggedIn,isAdmin, async(req,res)=>{
+router.post('/admin/:id/seller/verify',isLoggedIn,isBlocked,isAdmin, async(req,res)=>{
   try { 
     const {id} = req.params;
   const user = await User.findById(id);
@@ -26,7 +27,7 @@ router.post('/admin/:id/seller/verify',isLoggedIn,isAdmin, async(req,res)=>{
   }
 })
 
-router.delete('/admin/:id/delete',isLoggedIn,isAdmin, async(req,res)=>{
+router.delete('/admin/:id/delete',isLoggedIn,isBlocked,isAdmin, async(req,res)=>{
   try { 
     const {id} = req.params;
   await User.deleteOne({_id:id});

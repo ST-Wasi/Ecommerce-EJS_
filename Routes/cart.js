@@ -1,11 +1,11 @@
 const express = require("express");
 const Product = require("../models/Product");
-const { isLoggedIn } = require("../middlewares/middleware");
+const { isLoggedIn,isBlocked } = require("../middlewares/middleware");
 const User = require("../models/User");
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET)
 
-router.post("/product/:id/cart", isLoggedIn, async (req, res) => {
+router.post("/product/:id/cart", isLoggedIn,isBlocked, async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findById(id);
@@ -28,7 +28,7 @@ router.post("/product/:id/cart", isLoggedIn, async (req, res) => {
     return res.redirect("/home");
   }
 });
-router.get("/cart", isLoggedIn, async (req, res) => {
+router.get("/cart", isLoggedIn,isBlocked, async (req, res) => {
   const user = await req.user.populate("cart.product");
   const totalAmount = user.cart.reduce(
     (Accumulator, curr) => Accumulator + (curr.product.price*curr.quantity),
@@ -37,7 +37,7 @@ router.get("/cart", isLoggedIn, async (req, res) => {
   res.render("cart", { user, totalAmount });
 });
   
-router.get('/checkout', async (req, res) => {
+router.get('/checkout',isLoggedIn,isBlocked, async (req, res) => {
   try {
     const user = await req.user.populate('cart.product');
     const lineItems = user.cart.map((cartItem) => ({
@@ -66,7 +66,7 @@ router.get('/checkout', async (req, res) => {
   }
 });
   
-  router.post("/cart/:id/delete", async (req, res) => {
+  router.post("/cart/:id/delete",isLoggedIn,isBlocked, async (req, res) => {
     try {
       const { id } = req.params;
       await User.findByIdAndUpdate(req.user._id, { $pull: { cart: {product:id}} });
