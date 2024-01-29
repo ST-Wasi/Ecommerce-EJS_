@@ -13,13 +13,14 @@
             <th>Role</th>
             <th>Verify</th>
             <th>Delete</th>
+            <th>Block</th>
           </tr>
           <%for(let item of users){%> 
           <tr>
             <td><%=item._id%></td>
             <td><%=item.username%></td>
             <td><%=item.email%></td>
-            <td><%=item.role%></td>
+            <td><%= item.isAdmin ? 'Admin' : item.role %></td>
             <td>
                 <% if(item.role == 'seller'){%>
                    <% if(item.isVeryfiedSeller){ %>
@@ -38,6 +39,19 @@
                 <form action="/admin/<%=item._id%>/delete?_method=delete" method="post">                
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
+                <%}%>
+            </td>
+            <td>
+                <% if(!item.isAdmin){ %>
+                 <% if(!item.isBlocked){ %>
+                    <form action="/admin/<%=item._id%>/block" method="post">                
+                      <button type="submit" class="btn btn-danger">Block</button>
+                  </form>
+                 <% } else{ %>
+                    <form action="/admin/<%=item._id%>/block" method="post">                
+                      <button type="submit" class="btn btn-success">Un-block</button>
+                  </form>
+                <% } %>
                 <%}%>
             </td>
           </tr>

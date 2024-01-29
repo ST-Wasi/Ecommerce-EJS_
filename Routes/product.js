@@ -7,6 +7,7 @@ const {
   isSeller,
   isProductAuther,
   isVeryfiedSeller,
+  isBlocked,
 } = require("../middlewares/middleware");
 const Review = require("../models/Review");
 const User = require("../models/User");
@@ -47,7 +48,7 @@ router.get(
   }
 );
 
-router.get("/product/new", isLoggedIn, isSeller,isVeryfiedSeller, (req, res) => {
+router.get("/product/new", isLoggedIn, isSeller,isVeryfiedSeller,isBlocked, (req, res) => {
   res.render("new");
 });
 
@@ -61,7 +62,7 @@ router.get("/home", async (req, res) => {
   }
 });
 
-router.get("/product/:id", isLoggedIn, async (req, res) => {
+router.get("/product/:id", isLoggedIn,isBlocked, async (req, res) => {
   try {
     const { id } = req.params;
     const item = await Product.findById(id).populate("reviews");
@@ -82,6 +83,7 @@ router.patch(
   isSeller,
   isVeryfiedSeller,
   isProductAuther,
+  isBlocked,
   async (req, res) => {
     try {
       const { name, price, image, description } = req.body;
@@ -111,6 +113,7 @@ router.post(
   "/products",
   isLoggedIn,
   isSeller,
+  isBlocked,
   isVeryfiedSeller,
   validateProduct,
   async (req, res) => {
@@ -152,6 +155,7 @@ router.post(
 router.delete(
   "/product/:id/delete",
   isLoggedIn,
+  isBlocked,
   isSeller,
   isVeryfiedSeller,
   isProductAuther,

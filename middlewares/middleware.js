@@ -111,4 +111,17 @@ const isAdmin = async(req,res,next)=>{
   }
 }
 
-module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn,isSeller,isProductAuther,isVeryfiedSeller,isAdmin};
+const isBlocked = async(req,res,next)=>{
+  try {
+    if(req.user.isBlocked){
+      req.flash('error','We have found happeing something bad with your account. Your Account is temperorily Blocked. Please Contact Customer Care Team For A Quick Review');
+      return res.redirect('/home');
+    }
+    next();
+  } catch (err) {
+    req.flash('error','Internal Server Error While Searching For Blockage');
+    return res.redirect('/home')
+  }
+}
+
+module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn,isSeller,isProductAuther,isVeryfiedSeller,isAdmin,isBlocked};
