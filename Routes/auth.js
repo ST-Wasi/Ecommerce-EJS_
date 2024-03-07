@@ -11,24 +11,16 @@ router.get('/signup',(req,res)=>{
 
 router.post('/signup', async (req, res) => {
     try{
-        const { username, password, options, email,isVeryfiedSeller,isAdmin } = req.body;
-    let role;
-    if (options === 'buyer') {
-        role = 'buyer';
-    } else if (options === 'seller') {
-        role = 'seller';
-    } else {
-        role = 'defaultRole';
-    }
+        const { username, password, role, email,isVeryfiedSeller,isAdmin } = req.body;
 
     const user = new User({ username, role, email, isVeryfiedSeller,isAdmin });
-    if(options === 'buyer'){
+    if(role === 'buyer'){
         req.flash('success','Buyer Account Created Sucessfully')
-    } else if(options === 'seller'){
+    } else if(role === 'seller'){
         req.flash('success','Seller Account Created. You Can Add Products Once Veryfied By Admin. Thankyou For Your Patience')
     }
     await User.register(user, password);
-    res.redirect('/login');
+    res.send({msg: "Succesfullyl Loggedin"});
     }
     catch(error){
         req.flash('error','Internal server Error While Creating Accunt');
@@ -48,7 +40,7 @@ passport.authenticate('local',{
 }),
 function(req,res){
     req.flash('success', `Welcome Back ${req.user.username}`)
-    res.redirect('/home')
+    res.send('chat pe soya tha behnoi')
 }
 );
 

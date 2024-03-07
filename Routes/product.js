@@ -122,11 +122,6 @@ router.post(
       const requiredFields = { name, price, quantity, isInStock, isInSaleItem, isPopularItem, isNewItem, category,image };
       const missingFields = Object.keys(requiredFields).filter(field => !requiredFields[field]);
 
-      // if (missingFields.length > 0) {
-      //   const errorMsg = `Missing required fields: ${missingFields.join(', ')}`;
-      //   req.flash("error", errorMsg);
-      //   return res.render('error', { err: errorMsg });
-      // }
         await Product.create({
           name,
           image,
