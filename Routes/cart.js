@@ -29,7 +29,9 @@ router.post("/product/:id/cart", isLoggedIn,isBlocked, async (req, res) => {
   }
 });
 router.get("/cart", isLoggedIn,isBlocked, async (req, res) => {
+  console.log(req.user)
   const user = await req.user.populate("cart.product");
+  console.log('line 33 from cart.js',user)
   const totalAmount = user.cart.reduce(
     (Accumulator, curr) => Accumulator + (curr.product.price*curr.quantity),
     0

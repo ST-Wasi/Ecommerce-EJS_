@@ -17,7 +17,8 @@ const ProductAPI = require('./Routes/api/ProductAPI')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require("./models/User");
-
+const cors = require('cors')
+app.use(cors());
 const uri = process.env.ATLAS_URL
 
 mongoose
