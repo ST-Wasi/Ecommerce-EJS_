@@ -3,6 +3,7 @@ const router = express.Router();
 const { isAdmin, isLoggedIn, isBlocked } = require("../middlewares/middleware");
 const User = require("../models/User");
 const Product = require("../models/Product");
+const nodemailer = require('nodemailer');
 
 router.get(
   "/admin/dashboard",
