@@ -40,7 +40,7 @@ passport.authenticate('local',{
 }),
 function(req,res){
     req.flash('success', `Welcome Back ${req.user.username}`)
-    res.send('chat pe soya tha behnoi')
+    res.redirect('/home')
 }
 );
 
